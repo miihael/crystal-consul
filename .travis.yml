@@ -1,8 +1,7 @@
 language: crystal
-dist: xenial
+dist: focal
 crystal:
   - latest
-  - nightly
 
 services:
   - docker
