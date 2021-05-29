@@ -2,7 +2,7 @@
 
 [![Language](https://img.shields.io/badge/language-crystal-776791.svg)](https://github.com/crystal-lang/crystal)
 [![Build Status](https://travis-ci.org/rogerwelin/crystal-consul.svg?branch=master)](https://travis-ci.org/rogerwelin/crystal-consul)
-[![GitHub release](https://img.shields.io/github/release/rogerwelin/crystal-consul.svg)](https://github.com/rogerwelin/crystal-consul/releases)
+[![GitHub release](https://img.shields.io/github/release/miihael/crystal-consul.svg)](https://github.com/miihael/crystal-consul/releases)
 
 
 Crystal client for Consul HTTP API. For more information about the Consul HTTP API, go [here](https://www.consul.io/api/index.html).
@@ -15,7 +15,7 @@ Crystal-consul does not use any depenencies outside stdlib, hence no transitive 
    ```yaml
    dependencies:
      crystal-consul:
-       github: rogerwelin/crystal-consul
+       github: miihael/crystal-consul
    ```
 
 2. Run `shards install`
@@ -49,7 +49,7 @@ service.port = 9922
 c.agent.register_service(service)
 ```
 
-For more examples and usage view [the example page](https://github.com/rogerwelin/crystal-consul/blob/master/examples/examples.md)
+For more examples and usage view [the example page](https://github.com/miihael/crystal-consul/blob/master/examples/examples.md)
 
 
 ## Project Status
@@ -102,3 +102,4 @@ Pull requests are very much appreciated! When you create a PR please ensure:
 ## Contributors
 
 - [Roger Welin](https://github.com/rogerwelin) - creator and maintainer
+- Mikhael A - patches
