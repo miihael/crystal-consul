@@ -1,7 +1,7 @@
 # 💎 crystal-consul
 
 [![Language](https://img.shields.io/badge/language-crystal-776791.svg)](https://github.com/crystal-lang/crystal)
-[![Build Status](https://travis-ci.org/rogerwelin/crystal-consul.svg?branch=master)](https://travis-ci.org/rogerwelin/crystal-consul)
+[![Build Status](https://travis-ci.org/miihael/crystal-consul.svg?branch=master)](https://travis-ci.org/rogerwelin/crystal-consul)
 [![GitHub release](https://img.shields.io/github/release/miihael/crystal-consul.svg)](https://github.com/miihael/crystal-consul/releases)
 
 
