@@ -16,6 +16,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - name: Install and run consul
+      run: |
+        sudo apt-get -y install consul
+        sudo systemctl start consul
     - name: Install dependencies
       run: shards install
     - name: Run tests
