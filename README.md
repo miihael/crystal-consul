@@ -65,6 +65,7 @@ Implemented endpoints implements all consistency modes, filter options and query
 - [x] Health
 - [x] Snapshots
 - [x] Status
+- [x] Sessions
 
 
 #### TO-DO  
@@ -73,7 +74,6 @@ Implemented endpoints implements all consistency modes, filter options and query
 - [ ] Connect
 - [ ] Operator
 - [ ] Prepared Queries
-- [ ] Sessions
 - [ ] Transactions
 
 ## Testing
