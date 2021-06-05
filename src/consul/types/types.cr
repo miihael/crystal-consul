@@ -8,6 +8,8 @@ module Consul
         JSON.mapping(
           key: {type: String, key: "Key"},
           value: {type: String, key: "Value"},
+          session: {type: String, key: "Session", nilable: true},
+          lock_index: {type: Int32, key: "LockIndex", nilable: true},
         )
       end
 
@@ -17,6 +19,18 @@ module Consul
         def initialize(@key : String, @value : String)
         end
       end
+    end
+
+    class Session
+        JSON.mapping(
+          id: {type: String, key: "ID"},
+          name: {type: String, key: "Name", nilable: true},
+          node: {type: String, key: "Node", nilable: true},
+          checks: {type: Array(String), key: "Checks", nilable: true},
+          behavior: {type: String, key: "Behavior", default: "release"},
+          ttl: {type: String, key: "TTL", nilable: true},
+          lock_delay: {type: Float64, key: "LockDelay", nilable: true},
+        )
     end
 
     module Catalog

@@ -44,5 +44,26 @@ module Consul
     def delete_key(path : String)
       delete("/v1/kv/#{path}")
     end
+
+    def get_full(path : String) : Consul::Types::KV::KV?
+      consistency = get_consistency()
+      resp = get("/v1/kv/#{path}/?#{consistency}")
+      kvs = Array(Consul::Types::KV::KV).from_json(resp.body)
+      return nil if kvs.size == 0
+      kv = kvs.first
+      keyval = Base64.decode_string(kv.value)
+      kv.value = keyval
+      return kv
+    end
+
+    def acquire(path : String, session_uuid : String, content : String)
+      resp = put("/v1/kv/#{path}/?acquire=#{session_uuid}", content)
+      return resp.body.strip == "true"
+    end
+
+    def release(path : String, session_uuid : String)
+      resp = put("/v1/kv/#{path}/?acquire=#{session_uuid}")
+      return resp.body.strip == "true"
+    end
   end
 end

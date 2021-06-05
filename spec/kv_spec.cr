@@ -38,5 +38,19 @@ describe Consul do
         c.kv.get_key("animal ape")
       end
     end
+
+    it "acquire/release a key" do
+      c = Consul.client
+      s = c.session.create("test2")
+      res = c.kv.acquire("lock/test", s.id, "test_test")
+      res.should be_true
+      r = c.kv.get_full("lock/test")
+      if r
+        r.session.should eq s.id
+      end
+      rres = c.kv.release("lock/test", s.id)
+      rres.should be_true
+      c.session.destroy(s.id)
+    end
   end
 end
