@@ -93,7 +93,7 @@ Pull requests are very much appreciated! When you create a PR please ensure:
 * To add doc comments for new api features you add  
 
 
-1. Fork it (<https://github.com/rogerwelin/crystal-consul/fork>)
+1. Fork it (<https://github.com/miihael/crystal-consul/fork>)
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
@@ -102,4 +102,4 @@ Pull requests are very much appreciated! When you create a PR please ensure:
 ## Contributors
 
 - [Roger Welin](https://github.com/rogerwelin) - creator and maintainer
-- Mikhael A - patches
+- [Mikhael A](https://github.com/miihael) - patches, sessions support
