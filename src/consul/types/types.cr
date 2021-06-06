@@ -7,7 +7,7 @@ module Consul
       class KV
         JSON.mapping(
           key: {type: String, key: "Key"},
-          value: {type: String, key: "Value"},
+          value: {type: String, key: "Value", default: ""},
           session: {type: String, key: "Session", nilable: true},
           lock_index: {type: Int32, key: "LockIndex", nilable: true},
         )
