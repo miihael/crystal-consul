@@ -80,7 +80,7 @@ Implemented endpoints implements all consistency modes, filter options and query
 
 Only a working Crystal installation and Docker is required. Project does not use mocks, instead all endpoints are tested against a running Consul docker container.
 
-1. Run ```docker run -d -p 8500:8500 consul:1.5.1```
+1. Run ```docker run -d -p 8500:8500 consul:1.9```
 2. Run ```crystal spec``` from the project root
 
 ## Contributing
