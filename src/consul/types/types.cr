@@ -1,16 +1,22 @@
 require "json"
-require "json_mapping"
 
 module Consul
   module Types
     module KV
       class KV
-        JSON.mapping(
-          key: {type: String, key: "Key"},
-          value: {type: String, key: "Value", default: ""},
-          session: {type: String, key: "Session", nilable: true},
-          lock_index: {type: Int32, key: "LockIndex", nilable: true},
-        )
+        include JSON::Serializable
+
+        @[JSON::Field(key: "Key")]
+        property key : String
+
+        @[JSON::Field(key: "Value")]
+        property value : String = ""
+
+        @[JSON::Field(key: "Session")]
+        property session : String?
+
+        @[JSON::Field(key: "LockIndex")]
+        property lock_index : Int32?
       end
 
       struct KvPair
@@ -22,175 +28,336 @@ module Consul
     end
 
     class Session
-        JSON.mapping(
-          id: {type: String, key: "ID"},
-          name: {type: String, key: "Name", nilable: true},
-          node: {type: String, key: "Node", nilable: true},
-          checks: {type: Array(String), key: "Checks", nilable: true},
-          behavior: {type: String, key: "Behavior", default: "release"},
-          ttl: {type: String, key: "TTL", nilable: true},
-          lock_delay: {type: Float64, key: "LockDelay", nilable: true},
-        )
+      include JSON::Serializable
+
+      @[JSON::Field(key: "ID")]
+      property id : String
+
+      @[JSON::Field(key: "Name")]
+      property name : String?
+
+      @[JSON::Field(key: "Node")]
+      property node : String?
+
+      @[JSON::Field(key: "Checks")]
+      property checks : Array(String)?
+
+      @[JSON::Field(key: "Behavior")]
+      property behavior : String = "release"
+
+      @[JSON::Field(key: "TTL")]
+      property ttl : String?
+
+      @[JSON::Field(key: "LockDelay")]
+      property lock_delay : Float64?
     end
 
     module Catalog
       class Node
-        JSON.mapping(
-          id: {type: String, key: "ID"},
-          node: {type: String, key: "Node"},
-          address: {type: String, key: "Address"},
-          datacenter: {type: String, key: "Datacenter"},
-          tagged_addresses: {type: Hash(String, String), key: "TaggedAddresses", nilable: true},
-          meta: {type: Hash(String, String), key: "Meta", nilable: true}
-        )
+        include JSON::Serializable
+
+        @[JSON::Field(key: "ID")]
+        property id : String
+
+        @[JSON::Field(key: "Node")]
+        property node : String
+
+        @[JSON::Field(key: "Address")]
+        property address : String
+
+        @[JSON::Field(key: "Datacenter")]
+        property datacenter : String
+
+        @[JSON::Field(key: "TaggedAddresses")]
+        property tagged_addresses : Hash(String, String)?
+
+        @[JSON::Field(key: "Meta")]
+        property meta : Hash(String, String)?
       end
 
       class NodeService
-        JSON.mapping(
-          id: {type: String, key: "ID"},
-          node: {type: String, key: "Node"},
-          address: {type: String, key: "Address"},
-          datacenter: {type: String, key: "Datacenter"},
-          tagged_addresses: {type: Hash(String, String), key: "TaggedAddresses", nilable: true},
-          node_meta: {type: Hash(String, String), key: "NodeMeta", nilable: true},
-          service_id: {type: String, key: "ServiceID"},
-          service_name: {type: String, key: "ServiceName"},
-          service_tags: {type: Array(String), key: "ServiceTags", nilable: true},
-          service_address: {type: String, key: "ServiceAddress"},
-          service_meta: {type: Hash(String, String), key: "ServiceMeta"},
-          service_port: {type: Int32, key: "ServicePort"},
-        )
+        include JSON::Serializable
+
+        @[JSON::Field(key: "ID")]
+        property id : String
+
+        @[JSON::Field(key: "Node")]
+        property node : String
+
+        @[JSON::Field(key: "Address")]
+        property address : String
+
+        @[JSON::Field(key: "Datacenter")]
+        property datacenter : String
+
+        @[JSON::Field(key: "TaggedAddresses")]
+        property tagged_addresses : Hash(String, String)?
+
+        @[JSON::Field(key: "NodeMeta")]
+        property node_meta : Hash(String, String)?
+
+        @[JSON::Field(key: "ServiceID")]
+        property service_id : String
+
+        @[JSON::Field(key: "ServiceName")]
+        property service_name : String
+
+        @[JSON::Field(key: "ServiceTags")]
+        property service_tags : Array(String)?
+
+        @[JSON::Field(key: "ServiceAddress")]
+        property service_address : String
+
+        @[JSON::Field(key: "ServiceMeta")]
+        property service_meta : Hash(String, String)
+
+        @[JSON::Field(key: "ServicePort")]
+        property service_port : Int32
       end
     end
 
     module Agent
       class ServiceConf
-        JSON.mapping(
-          kind: {type: String, key: "Kind", nilable: true},
-          id: {type: String, key: "ID"},
-          service: {type: String, key: "Service"},
-          tags: {type: Array(String), key: "Tags", nilable: true},
-          meta: {type: Hash(String, String), key: "Meta"},
-          address: {type: String, key: "Address"},
-          port: {type: Int32, key: "Port"},
-          enable_tag_override: {type: Bool, key: "EnableTagOverride"},
-          content_hash: {type: String, key: "ContentHash"}
-        )
+        include JSON::Serializable
+
+        @[JSON::Field(key: "Kind")]
+        property kind : String?
+
+        @[JSON::Field(key: "ID")]
+        property id : String
+
+        @[JSON::Field(key: "Service")]
+        property service : String
+
+        @[JSON::Field(key: "Tags")]
+        property tags : Array(String)?
+
+        @[JSON::Field(key: "Meta")]
+        property meta : Hash(String, String)
+
+        @[JSON::Field(key: "Address")]
+        property address : String
+
+        @[JSON::Field(key: "Port")]
+        property port : Int32
+
+        @[JSON::Field(key: "EnableTagOverride")]
+        property enable_tag_override : Bool
+
+        @[JSON::Field(key: "ContentHash")]
+        property content_hash : String
       end
 
       class Service
-        JSON.mapping(
-          id: {type: String, key: "ID"},
-          service: {type: String, key: "Service"},
-          tags: {type: Array(String), key: "Tags"},
-          port: {type: Int32, key: "Port"},
-          address: {type: String, key: "Address"}
-        )
+        include JSON::Serializable
+
+        @[JSON::Field(key: "ID")]
+        property id : String
+
+        @[JSON::Field(key: "Service")]
+        property service : String
+
+        @[JSON::Field(key: "Tags")]
+        property tags : Array(String)
+
+        @[JSON::Field(key: "Port")]
+        property port : Int32
+
+        @[JSON::Field(key: "Address")]
+        property address : String
       end
 
       class Check
-        JSON.mapping(
-          node: {type: String, key: "Node"},
-          check_id: {type: String, key: "CheckID"},
-          name: {type: String, key: "Name"},
-          status: {type: String, key: "Status"},
-          output: {type: String, key: "Output"},
-          service_id: {type: String, key: "ServiceID", nilable: true},
-          service_name: {type: String, key: "ServiceName", nilable: true},
-          service_tags: {type: Array(String), key: "ServiceTags", nilable: true}
-        )
+        include JSON::Serializable
+
+        @[JSON::Field(key: "Node")]
+        property node : String
+
+        @[JSON::Field(key: "CheckID")]
+        property check_id : String
+
+        @[JSON::Field(key: "Name")]
+        property name : String
+
+        @[JSON::Field(key: "Status")]
+        property status : String
+
+        @[JSON::Field(key: "Output")]
+        property output : String
+
+        @[JSON::Field(key: "ServiceID")]
+        property service_id : String?
+
+        @[JSON::Field(key: "ServiceName")]
+        property service_name : String?
+
+        @[JSON::Field(key: "ServiceTags")]
+        property service_tags : Array(String)?
       end
 
       class ServiceHealth
-        JSON.mapping(
-          aggregated_status: {type: String, key: "AggregatedStatus"},
-          service: {type: Service, key: "Service"},
-          checks: {type: Array(Check), key: "Checks"}
-        )
+        include JSON::Serializable
+
+        @[JSON::Field(key: "AggregatedStatus")]
+        property aggregated_status : String
+
+        @[JSON::Field(key: "Service")]
+        property service : Service
+
+        @[JSON::Field(key: "Checks")]
+        property checks : Array(Check)
       end
     end
 
     module Event
       class Event
-        JSON.mapping(
-          id: {type: String, key: "ID"},
-          name: {type: String, key: "Name"},
-          payload: {type: String, key: "Payload", nilable: true},
-          node_filter: {type: String, key: "NodeFilter"},
-          service_filter: {type: String, key: "ServiceFilter"},
-          vesion: {type: Int32, key: "Version"},
-          ltime: {type: Int32, key: "LTime"}
-        )
+        include JSON::Serializable
+
+        @[JSON::Field(key: "ID")]
+        property id : String
+
+        @[JSON::Field(key: "Name")]
+        property name : String
+
+        @[JSON::Field(key: "Payload")]
+        property payload : String?
+
+        @[JSON::Field(key: "NodeFilter")]
+        property node_filter : String
+
+        @[JSON::Field(key: "ServiceFilter")]
+        property service_filter : String
+
+        @[JSON::Field(key: "Version")]
+        property vesion : Int32
+
+        @[JSON::Field(key: "LTime")]
+        property ltime : Int32
       end
     end
 
     module Health
       class Check
-        JSON.mapping(
-          node: {type: String, key: "Node"},
-          check_id: {type: String, key: "CheckID"},
-          name: {type: String, key: "Name"},
-          status: {type: String, key: "Status"},
-          notes: {type: String, key: "Notes"},
-          output: {type: String, key: "Output"},
-          service_id: {type: String, key: "ServiceID"},
-          service_name: {type: String, key: "ServiceName"},
-          service_tags: {type: Array(String), key: "ServiceTags"}
-        )
+        include JSON::Serializable
+
+        @[JSON::Field(key: "Node")]
+        property node : String
+
+        @[JSON::Field(key: "CheckID")]
+        property check_id : String
+
+        @[JSON::Field(key: "Name")]
+        property name : String
+
+        @[JSON::Field(key: "Status")]
+        property status : String
+
+        @[JSON::Field(key: "Notes")]
+        property notes : String
+
+        @[JSON::Field(key: "Output")]
+        property output : String
+
+        @[JSON::Field(key: "ServiceID")]
+        property service_id : String
+
+        @[JSON::Field(key: "ServiceName")]
+        property service_name : String
+
+        @[JSON::Field(key: "ServiceTags")]
+        property service_tags : Array(String)
       end
 
       class Service
-        JSON.mapping(
-          id: {type: String, key: "ID"},
-          service: {type: String, key: "Service"},
-          tags: {type: Array(String), key: "Tags"},
-          address: {type: String, key: "Address"},
-          port: {type: Int32, key: "Port"},
-          meta: {type: Hash(String, String), key: "Meta"},
-        )
+        include JSON::Serializable
+
+        @[JSON::Field(key: "ID")]
+        property id : String
+
+        @[JSON::Field(key: "Service")]
+        property service : String
+
+        @[JSON::Field(key: "Tags")]
+        property tags : Array(String)
+
+        @[JSON::Field(key: "Address")]
+        property address : String
+
+        @[JSON::Field(key: "Port")]
+        property port : Int32
+
+        @[JSON::Field(key: "Meta")]
+        property meta : Hash(String, String)
       end
 
       class NodeService
-        JSON.mapping(
-          node: {type: Consul::Types::Catalog::Node, key: "Node"},
-          service: {type: Service, key: "Service"},
-          chekcs: {type: Array(Check), key: "Checks"}
-        )
+        include JSON::Serializable
+
+        @[JSON::Field(key: "Node")]
+        property node : Consul::Types::Catalog::Node
+
+        @[JSON::Field(key: "Service")]
+        property service : Service
+
+        @[JSON::Field(key: "Checks")]
+        property chekcs : Array(Check)
       end
     end
 
     module Coordinate
       class Wan
-        JSON.mapping(
-          datacenter: {type: String, key: "Datacenter"},
-          area_id: {type: String, key: "AreaID"},
-          coordinates: {type: Array(Coordinates), key: "Coordinates"}
-        )
+        include JSON::Serializable
+
+        @[JSON::Field(key: "Datacenter")]
+        property datacenter : String
+
+        @[JSON::Field(key: "AreaID")]
+        property area_id : String
+
+        @[JSON::Field(key: "Coordinates")]
+        property coordinates : Array(Coordinates)
       end
 
       class Lan
-        JSON.mapping(
-          node: {type: String, key: "Node"},
-          segment: {type: String, key: "Segment"},
-          coord: {type: Coord, key: "Coord"}
-        )
+        include JSON::Serializable
+
+        @[JSON::Field(key: "Node")]
+        property node : String
+
+        @[JSON::Field(key: "Segment")]
+        property segment : String
+
+        @[JSON::Field(key: "Coord")]
+        property coord : Coord
       end
 
       class Coord
-        JSON.mapping(
-          adjustment: {type: Int32, key: "Adjustment"},
-          error: {type: Float64, key: "Error"},
-          height: {type: Float64, key: "Height"},
-          vec: {type: Array(Int32), key: "Vec"}
-        )
+        include JSON::Serializable
+
+        @[JSON::Field(key: "Adjustment")]
+        property adjustment : Int32
+
+        @[JSON::Field(key: "Error")]
+        property error : Float64
+
+        @[JSON::Field(key: "Height")]
+        property height : Float64
+
+        @[JSON::Field(key: "Vec")]
+        property vec : Array(Int32)
       end
 
       class Coordinates
-        JSON.mapping(
-          node: {type: String, key: "Node"},
-          segment: {type: String, key: "Segment", nilable: true},
-          coord: {type: Coord, key: "Coord"}
-        )
+        include JSON::Serializable
+
+        @[JSON::Field(key: "Node")]
+        property node : String
+
+        @[JSON::Field(key: "Segment")]
+        property segment : String?
+
+        @[JSON::Field(key: "Coord")]
+        property coord : Coord
       end
     end
   end

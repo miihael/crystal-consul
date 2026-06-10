@@ -1,35 +1,68 @@
 require "json"
-require "json_mapping"
 
 module Consul
   class Check
-    property name, id, interval, notes, deregister_critial_service_after, args
-    property alias_node, alias_service, docker_container_id
-    property grpc, grpc_use_tls, http, method, header, timeout, tls_skip_verify
-    property tcp, ttl, service_id, status
+    include JSON::Serializable
 
-    JSON.mapping(
-      name: {type: String, key: "Name"},
-      id: {type: String, key: "ID", nilable: true},
-      interval: {type: String, key: "Interval", nilable: true},
-      notes: {type: String, key: "Notes", nilable: true},
-      deregister_critial_service_after: {type: String, key: "DeregisterCriticalServiceAfter", nilable: true},
-      args: {type: Array(String), key: "Args", nilable: true},
-      alias_node: {type: String, key: "AliasNode", nilable: true},
-      alias_service: {type: String, key: "AliasSerice", nilable: true},
-      docker_container_id: {type: String, key: "DockerContainerID", nilable: true},
-      grpc: {type: String, key: "GRPC", nilable: true},
-      grpc_use_tls: {type: Bool, key: "GRPCUseTLS", nilable: true},
-      http: {type: String, key: "HTTP", nilable: true},
-      method: {type: String, key: "Method", nilable: true},
-      header: {type: Hash(String, Array(String)), key: "Header", nilable: true},
-      timeout: {type: String, key: "Timeout", nilable: true},
-      tls_skip_verify: {type: Bool, key: "TLSSkipVerify", nilable: true},
-      tcp: {type: String, key: "TCP", nilable: true},
-      ttl: {type: String, key: "TTL", nilable: true},
-      service_id: {type: String, key: "ServiceID", nilable: true},
-      status: {type: String, key: "Status", nilable: true},
-    )
+    @[JSON::Field(key: "Name")]
+    property name : String
+
+    @[JSON::Field(key: "ID")]
+    property id : String?
+
+    @[JSON::Field(key: "Interval")]
+    property interval : String?
+
+    @[JSON::Field(key: "Notes")]
+    property notes : String?
+
+    @[JSON::Field(key: "DeregisterCriticalServiceAfter")]
+    property deregister_critial_service_after : String?
+
+    @[JSON::Field(key: "Args")]
+    property args : Array(String)?
+
+    @[JSON::Field(key: "AliasNode")]
+    property alias_node : String?
+
+    @[JSON::Field(key: "AliasSerice")]
+    property alias_service : String?
+
+    @[JSON::Field(key: "DockerContainerID")]
+    property docker_container_id : String?
+
+    @[JSON::Field(key: "GRPC")]
+    property grpc : String?
+
+    @[JSON::Field(key: "GRPCUseTLS")]
+    property grpc_use_tls : Bool?
+
+    @[JSON::Field(key: "HTTP")]
+    property http : String?
+
+    @[JSON::Field(key: "Method")]
+    property method : String?
+
+    @[JSON::Field(key: "Header")]
+    property header : Hash(String, Array(String))?
+
+    @[JSON::Field(key: "Timeout")]
+    property timeout : String?
+
+    @[JSON::Field(key: "TLSSkipVerify")]
+    property tls_skip_verify : Bool?
+
+    @[JSON::Field(key: "TCP")]
+    property tcp : String?
+
+    @[JSON::Field(key: "TTL")]
+    property ttl : String?
+
+    @[JSON::Field(key: "ServiceID")]
+    property service_id : String?
+
+    @[JSON::Field(key: "Status")]
+    property status : String?
 
     def initialize(
       @name : String = "",

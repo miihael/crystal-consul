@@ -1,20 +1,32 @@
 require "json"
-require "json_mapping"
 
 module Consul
   class Service
-    property id, name, address, tags, port, tag_override, meta, check
+    include JSON::Serializable
 
-    JSON.mapping(
-      id: {type: String, key: "ID", nilable: true},
-      name: {type: String, key: "Name", nilable: true},
-      address: {type: String, key: "Address", nilable: true},
-      tags: {type: Array(String), key: "Tags", nilable: true},
-      port: {type: Int32, key: "Port"},
-      tag_override: {type: Bool, key: "EnableTagOverride"},
-      meta: {type: Hash(String, String), key: "Meta", nilable: true},
-      check: {type: Hash(String, String), key: "Check", nilable: true}
-    )
+    @[JSON::Field(key: "ID")]
+    property id : String?
+
+    @[JSON::Field(key: "Name")]
+    property name : String?
+
+    @[JSON::Field(key: "Address")]
+    property address : String?
+
+    @[JSON::Field(key: "Tags")]
+    property tags : Array(String)?
+
+    @[JSON::Field(key: "Port")]
+    property port : Int32
+
+    @[JSON::Field(key: "EnableTagOverride")]
+    property tag_override : Bool
+
+    @[JSON::Field(key: "Meta")]
+    property meta : Hash(String, String)?
+
+    @[JSON::Field(key: "Check")]
+    property check : Hash(String, String)?
 
     def initialize(
       @id : String? = nil,

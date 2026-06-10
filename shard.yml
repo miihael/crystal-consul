@@ -1,14 +1,10 @@
 name: crystal-consul
-version: 0.1.7
+version: 0.1.8
 
 authors:
   - Roger Welin <roger.welin@icloud.com>
   - Mikhael A <miihael@gmail.com>
 
-crystal: 1.0.0
+crystal: 1.20.0
 
 license: MIT
-
-dependencies:
-  json_mapping:
-    github: crystal-lang/json_mapping.cr
