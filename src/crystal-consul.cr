@@ -9,7 +9,7 @@ module Consul
     port : Int32 = 8500,
     scheme : String = "http",
     token : String = "",
-    consistency : String = "default"
+    consistency : String = "default",
   ) : Consul::Client
     Consul::Client.new(host, port, scheme, token, consistency)
   end

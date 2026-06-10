@@ -8,7 +8,7 @@ module Consul
     def get_checks_for_node(
       node : String,
       datacenter : String? = nil,
-      filter : String? = nil
+      filter : String? = nil,
     ) : Array(Consul::Types::Health::Check)
       endpoint = "/v1/health/node/#{node}"
       consistency = get_consistency()
@@ -33,7 +33,7 @@ module Consul
       datacenter : String? = nil,
       near : String? = nil,
       node_meta : String? = nil,
-      filter : String? = nil
+      filter : String? = nil,
     ) : Array(Consul::Types::Health::Check)
       endpoint = "/v1/health/checks/#{service}"
       consistency = get_consistency()
@@ -62,7 +62,7 @@ module Consul
       tag : String? = nil,
       node_meta : String? = nil,
       passing : String? = nil,
-      filter : String? = nil
+      filter : String? = nil,
     ) : Array(Consul::Types::Health::NodeService)
       endpoint = "/v1/health/service/#{service}"
       consistency = get_consistency()
@@ -98,7 +98,7 @@ module Consul
       datacenter : String? = nil,
       near : String? = nil,
       node_meta : String? = nil,
-      filter : String? = nil
+      filter : String? = nil,
     ) : Array(Consul::Types::Health::Check)
       endpoint = "/v1/health/state/#{state}"
       consistency = get_consistency()

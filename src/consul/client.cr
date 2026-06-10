@@ -36,7 +36,7 @@ module Consul
       @session = Consul::Session.new(client, consistency)
     end
 
-    private def http_client_instance(uri : String, timeout : Number,  token : String? = nil) : HTTP::Client
+    private def http_client_instance(uri : String, timeout : Number, token : String? = nil) : HTTP::Client
       uri = URI.parse(uri)
       client = HTTP::Client.new(uri)
       client.connect_timeout = timeout

@@ -14,7 +14,7 @@ module Consul
       datacenter : String? = nil,
       service : Consul::Service? = nil,
       check : Hash(String, String)? = nil,
-      node_meta : Hash(String, String)? = nil
+      node_meta : Hash(String, String)? = nil,
     )
       data = Consul::Util.build_hash({
         "Node"       => node,
@@ -35,7 +35,7 @@ module Consul
       node : String,
       datacenter : String? = nil,
       check_id : String? = nil,
-      service_id : String? = nil?
+      service_id : String? = nil?,
     )
       data = Consul::Util.build_hash({
         "Node"       => node,
@@ -72,7 +72,7 @@ module Consul
       tag : String? = nil,
       near : String? = nil,
       node_meta : String? = nil,
-      filter : String? = nil
+      filter : String? = nil,
     ) : Array(Consul::Types::Catalog::NodeService)
       endpoint = "/v1/catalog/service/#{service}"
       consistency = get_consistency()
@@ -99,7 +99,7 @@ module Consul
     def get_service_for_node(
       node : String,
       datacenter : String? = nil,
-      filter : String? = nil
+      filter : String? = nil,
     ) : Array(Consul::Types::Catalog::NodeService)
       endpoint = "/v1/catalog/node/#{node}"
       consistency = get_consistency()
@@ -131,7 +131,7 @@ module Consul
     def get_nodes(
       dc : String? = nil,
       near : String? = nil,
-      node_meta : String? = nil
+      node_meta : String? = nil,
     ) : Array(Consul::Types::Catalog::Node)
       endpoint = "/v1/catalog/nodes"
       consistency = get_consistency()

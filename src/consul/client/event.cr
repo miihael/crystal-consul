@@ -10,7 +10,7 @@ module Consul
       datacenter : String? = nil,
       node : String? = nil,
       service : String? = nil,
-      tag : String? = nil
+      tag : String? = nil,
     ) : Consul::Types::Event::Event
       endpoint = "/v1/event/fire/#{name}"
 
@@ -34,7 +34,7 @@ module Consul
       name : String? = nil,
       node : String? = nil,
       service : String? = nil,
-      tag : String? = nil
+      tag : String? = nil,
     ) : Array(Consul::Types::Event::Event)
       endpoint = "/v1/event/list"
 

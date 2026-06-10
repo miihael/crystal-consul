@@ -4,7 +4,7 @@ require "../util"
 
 module Consul
   class Session < Consul::Transport
-    def list() : Array(Consul::Types::Session)
+    def list : Array(Consul::Types::Session)
       consistency = get_consistency()
       resp = get("/v1/session/list?#{consistency}")
       return Array(Consul::Types::Session).from_json(resp.body)
@@ -36,7 +36,7 @@ module Consul
         "Datacenter" => datacenter,
       })
       resp = put("/v1/session/create", data.to_json)
-      #returns only ID
+      # returns only ID
       s = Consul::Types::Session.from_json(resp.body)
       s.node = node
       s.name = name

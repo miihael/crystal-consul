@@ -84,7 +84,7 @@ module Consul
       @tcp : String? = nil,
       @ttl : String? = nil,
       @service_id : String? = nil,
-      @status : String? = nil
+      @status : String? = nil,
     )
     end
   end

@@ -36,7 +36,7 @@ module Consul
       @port : Int32 = 0,
       @tag_override : Bool = false,
       @meta = {} of String => String,
-      @check = {} of String => String
+      @check = {} of String => String,
     )
     end
   end
